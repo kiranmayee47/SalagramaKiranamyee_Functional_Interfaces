@@ -1,0 +1,127 @@
+import java.util.ArrayList; 
+import java.util.LinkedList; 
+import java.util.List; 
+import java.util.function.*; 
+import java.util.Arrays;
+import java.util.Scanner;
+
+
+  
+  public class functionalInterfaces{
+      
+      /*Method for desired string i.e., start with 'a'(small) and has exactly length as 3*/
+
+     private static List<String> dStrings(List<String> list,Predicate<String> predicate)
+     {
+         
+         List<String> finalList =new ArrayList<>();
+         for(String s : list)
+         {
+             if(predicate.test(s))
+             {
+               finalList.add(s);
+             }
+         }
+        
+         return finalList;
+     }
+
+
+
+     /*Method for finding palindrome strings*/
+     
+     private static List<String> palindromeStrings(List<String> list,Predicate<String> predicate)
+     {
+         
+         List<String> finalList =new ArrayList<>();
+         for(String s : list)
+         {
+             if(predicate.test(s))
+             {
+               finalList.add(s);
+             }
+         }
+        
+         return finalList;
+     }
+
+     /*Method for finding average of the list*/
+
+     private static Integer getAvgList(List<Integer> list,Consumer<Integer> consumer)
+     {
+         Integer sum=0;
+         for(Integer i:list)
+         {
+             consumer.accept(i);
+             sum+=i;
+         }
+         sum=sum/list.size();
+         return sum;
+     }
+
+
+
+     public static void main(String []args){
+         
+        //Driver program to find average of the list 
+         List<Integer> list=Arrays.asList(1,2,3,4,5);
+         System.out.println("List to find avg is");
+         System.out.println();
+         Integer avg=getAvgList(list,(Integer i)->System.out.print(i+" "));
+         System.out.println();
+         System.out.println();
+         System.out.println("The avg of the list is");
+         System.out.println();
+         System.out.println(avg);
+
+
+       //Driver program to find desired list
+         String[] StrArray={"a","Abc","abc","Aabc","Aa","aAA","epam","pep"};
+
+         System.out.println();
+         System.out.println("The string array is");
+         System.out.println();
+         for(int k=0;k<StrArray.length;k++)
+          System.out.print(StrArray[k]+" ");
+         System.out.println();
+         System.out.println();
+         System.out.println("Desired strings are");
+         System.out.println();
+         List<String> StrList=Arrays.asList(StrArray);
+         List<String> desiredStr = dStrings(StrList, (String Str)->
+         {
+             if(Str.length()==3 && Str.charAt(0)=='a')
+               return true;
+             return false;
+         }
+         );
+         System.out.println(desiredStr);
+
+
+       //Driver program to find the palindrome strings
+         String[] strArray={"", "mom","dad","sit","malayalam","sis","bro","hii","epam"};
+         System.out.println();
+         System.out.println("The string array is");
+         System.out.println();
+         for(int k=0;k<strArray.length;k++)
+          System.out.print(strArray[k]+" ");
+         System.out.println();
+         System.out.println();
+         System.out.println("Palindrome strings are");
+         System.out.println();
+         List<String> strList=Arrays.asList(strArray);
+         List<String> listWithPalindrome = palindromeStrings(strList, (String str)->
+         {
+             String reverse ="";
+             for ( int i = str.length() - 1; i >= 0; i-- )  
+                   reverse = reverse + str.charAt(i);  
+             if (str.equals(reverse))
+               return true;
+             return false;
+         }
+         );
+         System.out.println(listWithPalindrome);
+    
+     }
+    
+}
